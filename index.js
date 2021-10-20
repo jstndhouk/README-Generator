@@ -20,7 +20,7 @@ const questions = [{
 
     {
         type: 'input',
-        message: 'Provide and useage information.',
+        message: 'Provide any useage information.',
         name: 'Usage',
     },
     {
@@ -47,24 +47,9 @@ const questions = [{
 
 // TODO: Create a function to write README file
 inquirer
-    .prompt([{
-            type: 'input',
-            message: 'What is your name?',
-            name: 'myname',
-        },
-        {
-            type: 'input',
-            message: 'What languages do you know?',
-            name: 'languages',
-        },
-        {
-            type: 'input',
-            message: 'What is youre preferred method of communication?',
-            name: 'method',
-        },
-    ])
+    .prompt(questions)
     .then((response) =>
-        fs.writeFile('response.txt', `The name was:${response.myname}.\n The language was: ${response.languages}.\n The preferred method of communnication was: ${response.method}.`, err => err ? console.error(err) : console.log('Success!'))
+        fs.writeFile('README.md', `# ${response.Title}\n\n# Description:\n${response.Description}\n\n# Installation Instructions: \n${response.Installation}\n\n# Usage: \n${response.Usage}\n\n# Contributions: \n${response.Contribution}\n\n# Tests: \n${response.Tests}\n\n# Github username: ${response.username}\n\n# Email:${response.email}`, err => err ? console.error(err) : console.log('Success!'))
     )
 //function writeToFile(fileName, data) {}
 
