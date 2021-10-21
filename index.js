@@ -5,33 +5,33 @@ const fs = require('fs');
 const questions = [{
         type: 'input',
         message: 'What is the name of your project?',
-        name: 'Title',
+        name: 'title',
     },
     {
         type: 'input',
         message: 'Provide a description of your project.',
-        name: 'Description',
+        name: 'description',
     },
     {
         type: 'input',
         message: 'Provide any installation instructions.',
-        name: 'Installation',
+        name: 'installation',
     },
 
     {
         type: 'input',
         message: 'Provide any useage information.',
-        name: 'Usage',
+        name: 'usage',
     },
     {
         type: 'input',
         message: 'Provide any contribution guidelines.',
-        name: 'Contribution',
+        name: 'contribution',
     },
     {
         type: 'input',
         message: 'Provide any test instructions.',
-        name: 'Tests',
+        name: 'tests',
     },
     {
         type: 'input',
@@ -48,10 +48,30 @@ const questions = [{
 // TODO: Create a function to write README file
 inquirer
     .prompt(questions)
-    .then((response) =>
-        fs.writeFile('README.md', `# ${response.Title}\n\n# Description:\n${response.Description}\n\n# Installation Instructions: \n${response.Installation}\n\n# Usage: \n${response.Usage}\n\n# Contributions: \n${response.Contribution}\n\n# Tests: \n${response.Tests}\n\n# Github username: ${response.username}\n\n# Email:${response.email}`, err => err ? console.error(err) : console.log('Success!'))
+    .then(({title, description, installation, usage, contribution, tests, username, email}) =>
+        fs.writeFileSync('README.md', 
+`# ${title}
+![Image output](https://img.shields.io/github/issues/${username}/${title}?style=for-the-badge)
+### Description: ${description}
+         
+         
+### Installation Instructions: \n${installation}
+         
+         
+### Usage: \n${usage}
+         
+         
+### Contributions: \n${contribution}
+         
+         
+### Tests: \n${tests}
+         
+         
+### Github username: ${username}
+         
+         
+# Email:${email}`, err => err ? console.error(err) : console.log('Success!'))
     )
-//function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
 //function init() {}
