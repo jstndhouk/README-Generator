@@ -17,7 +17,6 @@ const questions = [{
         message: 'Provide any installation instructions.',
         name: 'installation',
     },
-
     {
         type: 'input',
         message: 'Provide any useage information.',
@@ -52,27 +51,29 @@ const questions = [{
 
 // TODO: Create a function to write README file
 inquirer
-    .prompt(questionsconst)
+    .prompt(questions)
     .then((response) =>
         fs.writeFile('README.md', generateMD(response),err => err ? console.error(err) : console.log('Success!'))
     )
+
 if(technologies.includes('html'))
-   const htmlBadge=`(https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)`
+   var htmlBadge=`(https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)`
 else if(technologies.toLowerCase().includes('css'))
-   const cssBadge=`![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)`
+   var cssBadge=`![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)`
 else if (technologies.toLowerCase().includes('javaScript'))
-   const jsBadge=`![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)`
+   var jsBadge=`![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)`
 else if (technologies.toLowerCase().includes('jquery'))
-   const jqBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
-else if (technologies..toLowerCase().includes('Node.js'))
-   const nodeBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
+   var jqBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
+else if (technologies.toLowerCase().includes('Node.js'))
+    var nodeBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
 else 
-    const noBadge=`No valid language was chosen! :sob:`
+    var noBadge=`No valid language was chosen! :sob:`
+     //I want to make the promise fail if we get here in the conditional statement
 
 const badgeString=`${htmlBadge} ${cssBadge} ${jsBadge}  ${jqBadge}  ${nodeBadge}  ${noBadge}`
-    //I want to make the promise fail if we get here in the conditional statement
+   
 
-const generateMD=({title, description, installation, usage, contribution, tests, username, email}, htmlBadge, cssBadge, jsBadge, nodeBadge, noBadge ) =>
+const generateMD=({title, description, installation, usage, contribution, tests, username, email}, badgeString) =>
 `# **${title}**
 ![Image output](https://img.shields.io/github/issues/${username}/${title}?style=for-the-badge)
 
@@ -99,10 +100,3 @@ ${badgeString}
          
          
 # Email:${email}`
-       
-        
-    // TODO: Create a function to initialize app
-//function init() {}
-
-// Function call to initialize app
-//init();
