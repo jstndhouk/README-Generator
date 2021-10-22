@@ -35,6 +35,11 @@ const questions = [{
     },
     {
         type: 'input',
+        message: 'Enter technologies used.  Options: HTML, CSS, JavaScript, jQuery, Node.js',
+        name: 'technologies',
+    },
+    {
+        type: 'input',
         message: 'Provide your github username',
         name: 'username',
     },
@@ -47,33 +52,56 @@ const questions = [{
 
 // TODO: Create a function to write README file
 inquirer
-    .prompt(questions)
-    .then(({title, description, installation, usage, contribution, tests, username, email}) =>
-        fs.writeFileSync('README.md', 
-`# ${title}
-![Image output](https://img.shields.io/github/issues/${username}/${title}?style=for-the-badge)
-### Description: ${description}
-         
-         
-### Installation Instructions: \n${installation}
-         
-         
-### Usage: \n${usage}
-         
-         
-### Contributions: \n${contribution}
-         
-         
-### Tests: \n${tests}
-         
-         
-### Github username: ${username}
-         
-         
-# Email:${email}`, err => err ? console.error(err) : console.log('Success!'))
+    .prompt(questionsconst)
+    .then((response) =>
+        fs.writeFile('README.md', generateMD(response),err => err ? console.error(err) : console.log('Success!'))
     )
+if(technologies.includes('html'))
+   const htmlBadge=`(https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)`
+else if(technologies.toLowerCase().includes('css'))
+   const cssBadge=`![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)`
+else if (technologies.toLowerCase().includes('javaScript'))
+   const jsBadge=`![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)`
+else if (technologies.toLowerCase().includes('jquery'))
+   const jqBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
+else if (technologies..toLowerCase().includes('Node.js'))
+   const nodeBadge=`![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)`
+else 
+    const noBadge=`No valid language was chosen! :sob:`
 
-// TODO: Create a function to initialize app
+const badgeString=`${htmlBadge} ${cssBadge} ${jsBadge}  ${jqBadge}  ${nodeBadge}  ${noBadge}`
+    //I want to make the promise fail if we get here in the conditional statement
+
+const generateMD=({title, description, installation, usage, contribution, tests, username, email}, htmlBadge, cssBadge, jsBadge, nodeBadge, noBadge ) =>
+`# **${title}**
+![Image output](https://img.shields.io/github/issues/${username}/${title}?style=for-the-badge)
+
+#Technologies Used: 
+${badgeString}
+
+
+# Description: ${description}
+         
+         
+# Installation Instructions: \n${installation}
+         
+         
+# Usage: \n${usage}
+         
+         
+# Contributions: \n${contribution}
+         
+         
+# Tests: \n${tests}
+         
+         
+# Github: ${username}
+         
+         
+# Email:${email}`
+       
+        
+    // TODO: Create a function to initialize app
 //function init() {}
 
 // Function call to initialize app
